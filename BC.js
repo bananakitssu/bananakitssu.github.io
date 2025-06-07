@@ -1,5 +1,5 @@
-import { PlayerControls } from 'http://127.0.0.1:5500/js/lib/PlayerControls.js';
-import { World } from 'http://127.0.0.1:5500/mineyCraftyWorld.js';
+import { PlayerControls } from 'https://bananakitssu.github.io/js/lib/PlayerControls.js';
+import { World } from 'https://bananakitssu.github.io/mineyCraftyWorld.js';
 //import { Sky } from 'three/examples/jsm/objects/Sky.js';
 
 var player;
@@ -85,14 +85,14 @@ if (getCookie("player_uid")) {
 
 window.addEventListener("keyup", (e) => {
     if (e.key === "N") {
-        window.open("http://127.0.0.1:5500/miney-crafty-username-changer.html");
+        window.open("https://bananakitssu.github.io/miney-crafty-username-changer.html");
     } else if (e.key === "n") {
-        window.open("http://127.0.0.1:5500/miney-crafty-username-changer.html");
+        window.open("https://bananakitssu.github.io/miney-crafty-username-changer.html");
     }
 });
 
-import vertexShader from 'http://127.0.0.1:5500/shaders/vertexShader.glsl.js';
-import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js';
+import vertexShader from 'https://bananakitssu.github.io/shaders/vertexShader.glsl.js';
+import fragmentShader from 'https://bananakitssu.github.io/shaders/fragmentShader.glsl.js';
 
             
             window.ShadersEnabled = true;
@@ -872,22 +872,22 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 var mcBoatBottomGeo = new BoxGeometry( 1.1, 0.1, 2.4 );
                 var mcBoatBottomMat = [
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/Log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/Log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     })
                 ];
                 var mcBoatBottom = new Mesh( mcBoatBottomGeo, mcBoatBottomMat );
@@ -898,22 +898,22 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 var mcBoatLeftGeo = new BoxGeometry( 0.1, 0.65, 2.4 );
                 var mcBoatLeftMat = [
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     })
                 ];
                 var mcBoatLeft = new Mesh( mcBoatLeftGeo, mcBoatLeftMat );
@@ -924,22 +924,22 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 var mcBoatRightGeo = new BoxGeometry( 0.1, 0.65, 2.4 );
                 var mcBoatRightMat = [
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     })
                 ];
                 var mcBoatRight = new Mesh( mcBoatRightGeo, mcBoatRightMat );
@@ -950,22 +950,22 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 var mcBoatFrontGeo = new BoxGeometry( 1, 0.65, 0.1 );
                 var mcBoatFrontMat = [
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     })
                 ];
                 var mcBoatFront = new Mesh( mcBoatFrontGeo, mcBoatFrontMat );
@@ -977,22 +977,22 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 var mcBoatBackGeo = new BoxGeometry( 1, 0.65, 0.1 );
                 var mcBoatBackMat = [
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial ({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     })
                 ];
                 var mcBoatBack = new Mesh( mcBoatBackGeo, mcBoatBackMat );
@@ -1005,22 +1005,22 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 var mcBoatPaddleTopLeftGeo = new BoxGeometry( 0.3, 0.3, 2.2 );
                 var mcBoatPaddleTopLeftMat = [
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     })
                 ]
                 var mcBoatPaddleTopLeft = new Mesh( mcBoatPaddleTopLeftGeo, mcBoatPaddleTopLeftMat );
@@ -1030,22 +1030,22 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 var mcBoatPaddleBottomLeftGeo = new BoxGeometry( 1, 0.1, 1 );
                 var mcBoatPaddleBottomLeftMat = [
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     })
                 ]
                 var mcBoatPaddleBottomLeft = new Mesh( mcBoatPaddleBottomLeftGeo, mcBoatPaddleBottomLeftMat );
@@ -1058,22 +1058,22 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 var mcBoatPaddle2TopRightGeo = new BoxGeometry( 0.3, 0.3, 2.2 );
                 var mcBoatPaddle2TopRightMat = [
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     })
                 ]
                 var mcBoatPaddle2TopRight = new Mesh( mcBoatPaddle2TopRightGeo, mcBoatPaddle2TopRightMat );
@@ -1083,22 +1083,22 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 var mcBoatPaddle2BottomRightGeo = new BoxGeometry( 1, 0.1, 1 );
                 var mcBoatPaddle2BottomRightMat = [
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     }),
                     new MeshBasicMaterial({
-                        map: textureLoader.load('http://127.0.0.1:5500/textures/log.jpg')
+                        map: textureLoader.load('https://bananakitssu.github.io/textures/log.jpg')
                     })
                 ]
                 var mcBoatPaddle2BottomRight = new Mesh( mcBoatPaddle2BottomRightGeo, mcBoatPaddle2BottomRightMat );
@@ -1272,12 +1272,12 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
 
                 /*var BlockGeometry = new BoxGeometry( 1, 1, 1 );
                 var GrassBlockMaterial = [
-                    new ShaderMaterial({ /*map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader }),
-                    /*new ShaderMaterial({ /*map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  }),
-                    /*new ShaderMaterial({ /*map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockTop.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  }),
-                    /*new ShaderMaterial({ /*map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockBottom.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  }),
-                    /*new ShaderMaterial({ /*map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  }),
-                    /*new ShaderMaterial({ /*map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  })
+                    new ShaderMaterial({ /*map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader }),
+                    /*new ShaderMaterial({ /*map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  }),
+                    /*new ShaderMaterial({ /*map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockTop.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  }),
+                    /*new ShaderMaterial({ /*map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockBottom.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  }),
+                    /*new ShaderMaterial({ /*map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  }),
+                    /*new ShaderMaterial({ /*map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png'), *//*vertexShader: vertexShader, fragmentShader: fragmentShader  })
                 /*]
                 var GrassBlock = new Mesh( BlockGeometry, GrassBlockMaterial );
                 GrassBlock.position.y -= 1;
@@ -1862,7 +1862,7 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
 
             function getMaterial (blockType) {
                 if (blockType === "Bedrock") {
-                    return "http://127.0.0.1:5500/textures/BedrockTexture.webp";
+                    return "https://bananakitssu.github.io/textures/BedrockTexture.webp";
                 }
             }
 
@@ -2297,18 +2297,18 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
 
                 create () {
                     this.model = new Group(); /*new Mesh(new BoxGeometry(0.9, 2, 0.5), new MeshStandardMaterial({}))*/;
-                    this.torso = new Mesh(new BoxGeometry(0.9, 2, 0.5), [new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieTorsoRight.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieTorsoLeft.jpg')}),new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieTorsoTop.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieTorsoBottom.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieTorsoBack.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieTorsoFront.jpg')})]);
-                    this.leftArm = new Mesh(new BoxGeometry(0.5, 2, 0.5), [new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmRight.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmLeft.jpg')}),new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmBottom.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmTop.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmBack.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmFront.jpg')})]);
+                    this.torso = new Mesh(new BoxGeometry(0.9, 2, 0.5), [new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieTorsoRight.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieTorsoLeft.jpg')}),new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieTorsoTop.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieTorsoBottom.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieTorsoBack.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieTorsoFront.jpg')})]);
+                    this.leftArm = new Mesh(new BoxGeometry(0.5, 2, 0.5), [new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmRight.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmLeft.jpg')}),new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmBottom.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmTop.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmBack.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmFront.jpg')})]);
                     this.leftArm.position.x -= 0.7;
                     this.leftArm.position.y += 0.747;
                     this.leftArm.position.z -= 0.75;
                     this.leftArm.rotation.x = -1.57;
-                    this.rightArm = new Mesh(new BoxGeometry(0.5, 2, 0.5), [new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmRight.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmLeft.jpg')}),new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmBottom.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmTop.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmBack.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieArmFront.jpg')})]);
+                    this.rightArm = new Mesh(new BoxGeometry(0.5, 2, 0.5), [new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmRight.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmLeft.jpg')}),new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmBottom.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmTop.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmBack.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieArmFront.jpg')})]);
                     this.rightArm.position.x += 0.7;
                     this.rightArm.position.y += 0.747;
                     this.rightArm.position.z -= 0.75;
                     this.rightArm.rotation.x = -1.57;
-                    this.head = new Mesh(new BoxGeometry(0.9, 0.9, 0.9), [new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieHeadRight.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieHeadLeft.jpg')}),new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieHeadTop.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieHeadBottom.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieHeadBack.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('http://127.0.0.1:5500/textures/ZombieHeadFront.jpg')})]);
+                    this.head = new Mesh(new BoxGeometry(0.9, 0.9, 0.9), [new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieHeadRight.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieHeadLeft.jpg')}),new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieHeadTop.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieHeadBottom.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieHeadBack.jpg')}), new MeshStandardMaterial({map: new TextureLoader().load('https://bananakitssu.github.io/textures/ZombieHeadFront.jpg')})]);
                     this.head.position.y += 1.45;
                     this.leftLeg = new Mesh(new BoxGeometry(0.5, 2, 0.5), new MeshStandardMaterial({}));
                     this.leftLeg.position.y -= 2;
@@ -3245,7 +3245,7 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                         let y = posesY[Math.floor(Math.random() * posesY.length)];
                         let z = posesZ[Math.floor(Math.random() * posesZ.length)];
                         let num = numbers[Math.floor(Math.random() * numbers.length)];
-                        let breakParticles = new gameParticles({ "x": x, "y": y, "z": z }, `http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom - ${num}.png`, true, 0.2, 0.2, 0.01, 1, 0, true, 0.5, 5000);
+                        let breakParticles = new gameParticles({ "x": x, "y": y, "z": z }, `https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom - ${num}.png`, true, 0.2, 0.2, 0.01, 1, 0, true, 0.5, 5000);
                     }
                 }
                 if (msg.data.includes("Terrain: {")) {
@@ -3585,9 +3585,9 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                         handPosZ = this.Player.position.z;
 
                         var handGeometry = new BoxGeometry(handSizeX, handSizeY, handSizeZ);
-                        let m1 = new MeshBasicMaterial({ opacity: 0, wireframe: false, transparent: true, map: handTextureLoader.load("http://127.0.0.1:5500/textures/Hand.png")});
-                        let m2 = new MeshBasicMaterial({ opacity: 0, wireframe: false, transparent: true, map: handTextureLoader.load("http://127.0.0.1:5500/textures/HandTop.png")});
-                        let m3 = new MeshBasicMaterial({ opacity: 0, wireframe: false, transparent: true, map: handTextureLoader.load("http://127.0.0.1:5500/textures/HandBottom.png")});
+                        let m1 = new MeshBasicMaterial({ opacity: 0, wireframe: false, transparent: true, map: handTextureLoader.load("https://bananakitssu.github.io/textures/Hand.png")});
+                        let m2 = new MeshBasicMaterial({ opacity: 0, wireframe: false, transparent: true, map: handTextureLoader.load("https://bananakitssu.github.io/textures/HandTop.png")});
+                        let m3 = new MeshBasicMaterial({ opacity: 0, wireframe: false, transparent: true, map: handTextureLoader.load("https://bananakitssu.github.io/textures/HandBottom.png")});
                         m1.minFilter = LinearFilter;
                         m2.minFilter = LinearFilter;
                         m3.minFilter = LinearFilter;
@@ -4201,7 +4201,7 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                     sun_moon_class.create();
                     sun_moon_created = true;
                 }
-                var hand = new LeftHand("Defualt", camera, "http://127.0.0.1:5500/textures/BedrockTexture.webp");
+                var hand = new LeftHand("Defualt", camera, "https://bananakitssu.github.io/textures/BedrockTexture.webp");
 
                 //if (window.BeforeHp === window.Hp) {} else {hp.hpUpdate(window.Hp);hp.maxUpdate(window.HpMax);hp.initHp();window.BeforeHp = window.Hp};
 
@@ -4754,15 +4754,15 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
             function getMaterialFace (face, blockType) {
                 if (blockType === "minecraft:dirt_lock") {
                     if (face === "top") {
-                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom.png')});
+                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom.png')});
                     } else if (face === "bottom") {
-                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom.png')});
+                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom.png')});
                     } else if (face === "left") {
-                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom.png')});
+                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom.png')});
                     } else if (face === "right") {
-                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom.png')});
+                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom.png')});
                     } else if (face === "front") {
-                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom.png')});
+                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom.png')});
                     }
                 }
             }
@@ -4770,15 +4770,15 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
             function getMaterials (blockType, position, isShading, fragment, vertex) {
                 if (isShading) {
                     if (blockType === "minecraft:wood") {
-                        return new ShaderMaterial({ color: 'black', fragmentShader: fragment, vertexShader: vertex, wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/Log.jpg')});
+                        return new ShaderMaterial({ color: 'black', fragmentShader: fragment, vertexShader: vertex, wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/Log.jpg')});
                     } else if (blockType === "minecraft:dirt") {
                         /*return [
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockTop.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockBottom.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockTop.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockBottom.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png')}),
                         ];*/
                         /*let allowedMaterials = {
                             "x-positive": true,
@@ -4899,25 +4899,25 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                         }
                         Materials.push(right, left, top, bottom, back, front);
                         return Materials;*/
-                        return new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, wireframe: false, color: 'black', map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom.png')});
+                        return new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, wireframe: false, color: 'black', map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom.png')});
                     } else if (blockType === "minecraft:oak_plank") {
-                        return new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, wireframe: false, color: 'black', map: new TextureLoader().load('http://127.0.0.1:5500/textures/OakPlank.png')});
+                        return new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, wireframe: false, color: 'black', map: new TextureLoader().load('https://bananakitssu.github.io/textures/OakPlank.png')});
                     } else if (blockType === "minecraft:bedrock") {
-                        return new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, wireframe: false, color: 'black', map: new TextureLoader().load('http://127.0.0.1:5500/textures/BedrockTexture.webp')});
+                        return new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, wireframe: false, color: 'black', map: new TextureLoader().load('https://bananakitssu.github.io/textures/BedrockTexture.webp')});
                     } else if (blockType === "minecraft:glass_block") {
-                        return new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, transparent: true, color: 'black', wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGlass.png')});
+                        return new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, transparent: true, color: 'black', wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGlass.png')});
                     }
                 } else {
                     if (blockType === "minecraft:wood") {
-                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/Log.jpg')});
+                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/Log.jpg')});
                     } else if (blockType === "minecraft:dirt") {
                         /*return [
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockTop.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockBottom.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png')}),
-                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockTop.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockBottom.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png')}),
+                            new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png')}),
                         ];*/
                         /*let allowedMaterials = {
                             "x-positive": true,
@@ -5038,13 +5038,13 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                         }
                         Materials.push(right, left, top, bottom, back, front);
                         return Materials;*/
-                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom.png')});
+                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom.png')});
                     } else if (blockType === "minecraft:oak_plank") {
-                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/OakPlank.png')});
+                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/OakPlank.png')});
                     } else if (blockType === "minecraft:bedrock") {
-                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/BedrockTexture.webp')});
+                        return new MeshStandardMaterial({ wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/BedrockTexture.webp')});
                     } else if (blockType === "minecraft:glass_block") {
-                        return new MeshStandardMaterial({ transparent: true, wireframe: false, map: new TextureLoader().load('http://127.0.0.1:5500/textures/MinecraftGlass.png')});
+                        return new MeshStandardMaterial({ transparent: true, wireframe: false, map: new TextureLoader().load('https://bananakitssu.github.io/textures/MinecraftGlass.png')});
                     }
                 }
             }
@@ -5377,9 +5377,9 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 this.mesh;
 
                 var textureLoader = new TextureLoader();
-                //var textureTop = textureLoader.load("http://127.0.0.1:5500/textures/MinecraftGrassBlockTop.png");
-                //var textureButtom = textureLoader.load("http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom.png");
-                var textureSide = textureLoader.load("http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png");
+                //var textureTop = textureLoader.load("https://bananakitssu.github.io/textures/MinecraftGrassBlockTop.png");
+                //var textureButtom = textureLoader.load("https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom.png");
+                var textureSide = textureLoader.load("https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png");
                 var cube_geometry = new BoxGeometry( 0.85, 1.5, 0.5 );
                 var cube_geometry3 = new BoxGeometry( 0.5, 1.5, 0.5 ); // leg
                 var cube_geometry2 = new BoxGeometry( 1, 1, 1);

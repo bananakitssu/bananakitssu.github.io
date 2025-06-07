@@ -40,12 +40,12 @@
         <style>
             @font-face {
                 font-family: minecraft;
-                src: url('http://127.0.0.1:5500/MinecraftFonts/MinecraftRegular-Bmg3.otf');
+                src: url('https://bananakitssu.github.io/MinecraftFonts/MinecraftRegular-Bmg3.otf');
             }
 
             @font-face {
                 font-family: minecraftItalic;
-                src: url('http://127.0.0.1:5500/MinecraftFonts/MinecraftItalic-R8Mo.otf');
+                src: url('https://bananakitssu.github.io/MinecraftFonts/MinecraftItalic-R8Mo.otf');
             }
 
             body {
@@ -273,7 +273,7 @@
                     left: 0%;
                 }
                 margin: auto auto;
-                /*background-image: url("http://127.0.0.1:5500/MinecraftButton.png");*/
+                /*background-image: url("https://bananakitssu.github.io/MinecraftButton.png");*/
             }
 
             .game {
@@ -1588,8 +1588,8 @@
                                         recall.data.scopes.forEach(async recallScope => {
                                             if (recallScope.type === "RobloxDevicesConsole") {
                                                 let counted = 0;
-                                                let url1 = "http://127.0.0.1:5500/Players/players.json";
-                                                let url2 = "http://127.0.0.1:5500/Players/Data/uid-";
+                                                let url1 = "https://bananakitssu.github.io/Players/players.json";
+                                                let url2 = "https://bananakitssu.github.io/Players/Data/uid-";
                                                 try {
                                                     let res = await fetch(url1);
                                                     if (!res.ok) {
@@ -2616,7 +2616,7 @@
             })
         </script>
         <!--<script type="module">
-            import { PlayerControls } from 'http://127.0.0.1:5500/js/lib/PlayerControls.js';
+            import { PlayerControls } from 'https://bananakitssu.github.io/js/lib/PlayerControls.js';
 
             var container, scene, camera, renderer;
             var controls;
@@ -2716,9 +2716,9 @@
                 this.mesh;
 
                 var textureLoader = new TextureLoader();
-                //var textureTop = textureLoader.load("http://127.0.0.1:5500/textures/MinecraftGrassBlockTop.png");
-                //var textureButtom = textureLoader.load("http://127.0.0.1:5500/textures/MinecraftGrassBlockButtom.png");
-                var textureSide = textureLoader.load("http://127.0.0.1:5500/textures/MinecraftGrassBlockSide.png");
+                //var textureTop = textureLoader.load("https://bananakitssu.github.io/textures/MinecraftGrassBlockTop.png");
+                //var textureButtom = textureLoader.load("https://bananakitssu.github.io/textures/MinecraftGrassBlockButtom.png");
+                var textureSide = textureLoader.load("https://bananakitssu.github.io/textures/MinecraftGrassBlockSide.png");
                 var cube_geometry = new BoxGeometry( 1, 2, 0.5 );
                 var cube_geometry3 = new BoxGeometry( 0.5, 2, 0.5 );
                 var cube_geometry2 = new BoxGeometry( 1, 1, 1);
