@@ -646,10 +646,10 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 container = document.querySelector('.game');
 
                 camera = new PerspectiveCamera( window.FOV, window.innerWidth / window.innerHeight, window.near, window.far );
-                hp = new HP("http://127.0.0.1:5500/resources/FullHP.png", "http://127.0.0.1:5500/resources/HalfHP.png", "http://127.0.0.1:5500/resources/EmptyHP.png", 1, {"max": 40, "current": 20}, camera);
+                hp = new HP("https://bananakitssu.github.io/resources/FullHP.png", "https://bananakitssu.github.io/resources/HalfHP.png", "https://bananakitssu.github.io/resources/EmptyHP.png", 1, {"max": 40, "current": 20}, camera);
                 hp.setRegenerateSpeed(1000);
                 hp.setRegenerateAmount(1);
-                hunger = new Hunger("http://127.0.0.1:5500/resources/FullHunger.png", "http://127.0.0.1:5500/resources/HalfHunger.png", "http://127.0.0.1:5500/resources/EmptyHunger.png", 1, {"max": 20, "current": 20}, camera, hp);
+                hunger = new Hunger("https://bananakitssu.github.io/resources/FullHunger.png", "https://bananakitssu.github.io/resources/HalfHunger.png", "https://bananakitssu.github.io/resources/EmptyHunger.png", 1, {"max": 20, "current": 20}, camera, hp);
                 hunger.setRemoveSpeed(60000);
                 hunger.setRemoveAmount(1);
 
@@ -1194,7 +1194,7 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                         document.removeEventListener('mousemove', onMouseMove, false);
                     }
                 });
-                const moonTexture = new TextureLoader().load('http://127.0.0.1:5500/resources/MCMoon.png');
+                const moonTexture = new TextureLoader().load('https://bananakitssu.github.io/resources/MCMoon.png');
 
                 // Create the moon geometry and material
                 const moonGeometry = new BoxGeometry(0, 32, 32);
@@ -1204,7 +1204,7 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 // Position the moon and sun
                 moon.position.set(50 + window.group.position.x, window.group.position.y, window.group.position.z);
 
-                const sunTexture = new TextureLoader().load('http://127.0.0.1:5500/resources/MCSun.png');
+                const sunTexture = new TextureLoader().load('https://bananakitssu.github.io/resources/MCSun.png');
 
                 // Create the sun geometry and material
                 //const sunGeometry = new BoxGeometry(0, 32, 32);
@@ -2018,7 +2018,7 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                 }
 
                 model;
-                baseURL = "http://127.0.0.1:5500/resources/NameTagBackground.png";
+                baseURL = "https://bananakitssu.github.io/resources/NameTagBackground.png";
                 interval;
                 interval2
 
@@ -3804,8 +3804,8 @@ import fragmentShader from 'http://127.0.0.1:5500/shaders/fragmentShader.glsl.js
                     let sun_moon_group = new Group();
                     sun_moon_group.name = "sun_moon";
                     let sun_moon_geometry = new BoxGeometry(500, 500, 0);
-                    let sunTexture = new TextureLoader().load('http://127.0.0.1:5500/resources/MCSun.png');
-                    let moonTexture = new TextureLoader().load('http://127.0.0.1:5500/resources/MCMoon.png');
+                    let sunTexture = new TextureLoader().load('https://bananakitssu.github.io/resources/MCSun.png');
+                    let moonTexture = new TextureLoader().load('https://bananakitssu.github.io/resources/MCMoon.png');
                     let sun = new Mesh(sun_moon_geometry, new MeshBasicMaterial({ transparent: true, opacity: 1, map: sunTexture }));
                     let moon = new Mesh(sun_moon_geometry, new MeshBasicMaterial({ transparent: true, opacity: 1, map: moonTexture }));
                     var color = 0xFFFFFF;
