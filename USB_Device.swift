@@ -1,3 +1,0 @@
-struct USB_Device {
-    
-}
