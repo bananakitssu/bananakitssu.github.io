@@ -2,7 +2,7 @@
 
 Made for coders that uses Python Turtle or wants to use Python Turtle.
 
-Click here to go to the BTDPE Engine homepage: https://bananakitssu.github.io/BTDPE.html
+Click (here)[https://bananakitssu.github.io/BTDPE.html] to go to the BTDPE Engine homepage
 
 **Updates**
 
