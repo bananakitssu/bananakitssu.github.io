@@ -4,9 +4,126 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BTDPE Downloads</title>
+        <style>
+            * {
+                font-family: Arial, sans-serif;
+            }
+            header {
+                position: absolute;
+                top: 0%;
+                left: 0%;
+                background-color: rgb(113, 113, 227);
+                width: 100%;
+                height: 40px;
+            }
+            #version {
+                position: relative;
+                background-color: rgb(53, 53, 255);
+                border-radius: 10px;
+                padding: 5px 5px 5px 5px;
+                text-decoration: none;
+                color: black;
+                overflow: hidden;
+                vertical-align: middle;
+                display: inline-block; 
+                width: 140px;
+                height: 17px;
+                cursor: pointer;
+                transition: background-color .25s ease-in-out;
+                &:hover {
+                    background-color: rgb(47, 47, 228);
+                }
+            }
+
+            #version .circle {
+                background-color: rgb(43, 43, 212);
+                border-radius: 1000px;
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                /*animation-name: slideAndFade;
+                animation-duration: 1.5s;
+                animation-iteration-count: infinite;*/
+            }
+
+            #version a {
+                position: absolute;
+                z-index: 1;
+                user-select: none; 
+                
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+            }
+
+            .animate {
+                animation-name: slideAndFade;
+                animation-duration: .5s;
+                animation-timing-function: ease-out;
+                animation-iteration-count: 1;
+            }
+
+            @keyframes slideAndFade {
+                0% {
+                    opacity: 0;
+                    width: 0%;
+                    height: 0%;
+                }
+                
+                40% {
+                    top: 0%;
+                    left: 0%;
+                    opacity: 1;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                75% {
+                    top: 0%;
+                    left: 0%;
+                    opacity: 1;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                100% {
+                    top: 0%;
+                    left: 0%;
+                    opacity: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        </style>
     </head>
     <body>
-        <span style="margin-bottom: 20px; font-family: Arial;">Versions you can download:</span><br><br>
-        <span style="font-family: Arial, sans-serif; background-color: rgb(53, 53, 255); border-radius: 1000px; padding: 5px 5px 5px 5px;"><a href="BTDPE_Engine.py" style="text-decoration: none; color: white;">1.0.0 BETA</a></span>
+        <header><img src="BTDPE.png" width="40" height="40" onclick="window.location.href = 'BTDPE.html'" style="cursor: pointer;"><span style="position: absolute;margin-top: 12px; color: white;">BTDPE</span></header>
+        <br><br>
+        <span style="margin-bottom: 20px; font-family: Arial;">Versions of the BTDPE source file you can download:</span><br><br>
+        <span id="version" style="font-family: Arial, sans-serif; border-radius: 1000px; padding: 10px 10px 10px 10px;"><a href="BTDPE_v1_0_0_Beta.py" style="text-decoration: none; color: white;">1.0.0 BETA (Latest)</a><div class="circle"></div></span>
+        <script>
+            const myButton = document.querySelector('#version');
+            const myBox = document.querySelector('#version .circle');
+            myBox.style.opacity = 0
+
+            myButton.addEventListener('click', function(event) {
+                myBox.style.opacity = 1
+                const buttonReact = myButton.getBoundingClientRect();
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+                const relativeX = mouseX - buttonReact.left - 4.5;
+                const relativeY = mouseY - buttonReact.top -3;
+                myBox.style.display = 'block';
+                myBox.style.left = `${relativeX}px`;
+                myBox.style.top = `${relativeY}px`;
+                void myBox.offsetWidth;
+                myBox.classList.add('animate');
+                
+                myBox.addEventListener('animationend', function() {
+                    myBox.classList.remove('animate');
+                    myBox.style.opacity = 0
+                }, { once: true });
+            });
+        </script>
     </body>
 </html>

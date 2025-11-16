@@ -7,9 +7,75 @@
         <link rel="stylesheet" href="BTDPE.css">
     </head>
     <body>
-        <span>BTDPE (Bananakitssu's 3D Python Engine) [BETA]</span><br><br>
-        <span>BTDPE the 3D engine coders may want for coding 3D games in python using the turtle module.</span><br><br>
-        <span>Message From The Developer: We will be creating a BTDPE Editor application for you to edit your game easier. We will create this application after we create Version RELEASE 1.0.0 of BTDPE.</span><br><br><br>
-        <span>Click <a href="BTDPE_Downloads.html">here</a> to go to the Downloads page.</span>
+        <header><img src="BTDPE.png" width="40" height="40"><span style="position: absolute;margin-top: 12px; color: white;">BTDPE</span><a href="BTDPE_Docs.html" class="docs" onmouseover="turnOnDecoration(this)" onmouseleave="turnOffDecoration(this)" style="color: white; position: absolute;margin-top: 10px; margin-left: 86.5%;">Docs</a></header>
+        <br><br>
+        <img src="BTDPE.png" width="200" height="200" style="border: 1.5px solid black;border-radius: 10%;">
+        <span style="position: absolute;font-size: 30px; margin-left: 10px;">BTDPE [BETA]</span>
+        <!--<span>BTDPE the 3D engine coders may want for coding 3D games in python using the turtle module.</span><br><br>
+        <span style="display: inline-block; width: 50%;">Message From The Developer: We will be creating a BTDPE Editor application for you to edit your game easier. We will create this application after we create Version RELEASE 1.0.0 of BTDPE.</span><br><br><br>-->
+        <span style="opacity: 0.5;position: absolute; margin-top: 35px; margin-left: 10px;">The BTDPE python file is open-source.</span>
+        <a class="Latest_Ver" href="BTDPE_v1_0_0_Beta.py" style="position: absolute; margin-top: 60px; margin-left: 10px;"><span>Download Latest Version</span><div class="circle"></div></a>
+        <a class="Downloads" href="BTDPE_Downloads.html" style="position: absolute; margin-top: 60px; margin-left: 210px"><span style="margin-left: 50px;">All versions</span><div class="circle"></div></a><br>
+        <span style="position: absolute;width:370px;margin-left: 215px; margin-top: -110px;">BTDPE is a python based 3D game engine using the python turtle module. This is still underdevelopment and it isn't recommended to be used yet.</span>
+        <!--<span>Click <a href="BTDPE_Downloads.html">here</a> to go to the Downloads page.</span>-->
+        <script>
+            const myButton = document.querySelector('.Latest_Ver');
+            const myBox = document.querySelector('.Latest_Ver .circle');
+            myBox.style.opacity = 0
+
+            myButton.addEventListener('click', function(event) {
+                myBox.style.opacity = 1
+                const buttonReact = myButton.getBoundingClientRect();
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+                const relativeX = mouseX - buttonReact.left -4.5;
+                const relativeY = mouseY - buttonReact.top -3;
+                myBox.style.display = 'block';
+                myBox.style.left = `${relativeX}px`;
+                myBox.style.top = `${relativeY}px`;
+                void myBox.offsetWidth;
+                myBox.classList.add('animate');
+                
+                myBox.addEventListener('animationend', function() {
+                    myBox.classList.remove('animate');
+                    myBox.style.opacity = 0
+                }, { once: true });
+            });
+        </script>
+        <script>
+            const myButton2 = document.querySelector('.Downloads');
+            const myBox2 = document.querySelector('.Downloads .circle');
+            myBox2.style.opacity = 0
+
+            myButton2.addEventListener('click', function(event) {
+                myBox2.style.opacity = 1
+                const buttonReact = myButton2.getBoundingClientRect();
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+                const relativeX = mouseX - buttonReact.left -4.5;
+                const relativeY = mouseY - buttonReact.top -3;
+                myBox2.style.display = 'block';
+                myBox2.style.left = `${relativeX}px`;
+                myBox2.style.top = `${relativeY}px`;
+                void myBox2.offsetWidth;
+                myBox2.classList.add('animate');
+                
+                myBox2.addEventListener('animationend', function() {
+                    myBox2.classList.remove('animate');
+                    myBox2.style.opacity = 0
+                }, { once: true });
+            });
+        </script>
+        <script>
+            function turnOnDecoration (THIS) {
+                THIS.style.textDecoration = 'underline';
+            }
+
+            function turnOffDecoration (THIS) {
+                THIS.style.textDecoration = 'none'
+            }
+
+            turnOffDecoration(document.querySelector('.docs'))
+        </script>
     </body>
 </html>

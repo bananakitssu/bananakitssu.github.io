@@ -146,12 +146,13 @@ def set_resolution (width=900, height=500, BTDPE_Turtle=None):
     BTDPE_Turtle.setup(width, height)
 
 def get_vsync_value ():
-    import pygame
-    pygame.init()
-    info = pygame.display.Info()
-    vsync = info.current_h
-    pygame.quit()
-    return vsync
+    #import pygame
+    #pygame.init()
+    #info = pygame.display.Info()
+    #vsync = info.current_h
+    #pygame.quit()
+    #return vsync
+    return
 
 def left_arrow ():
     global CamRotY
@@ -782,9 +783,6 @@ def draw (t):
                 #CamX += 0.01
             
             #draw(t)
-
-global timerOn
-global elapsed_time
 
 timerOn = False
 elapsed_time = 0

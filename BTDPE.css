@@ -1,3 +1,130 @@
-span {
+* {
     font-family: Arial, sans-serif;
+}
+
+.Latest_Ver {
+    position: relative;
+    background-color: rgb(127, 127, 255);
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+    text-decoration: none;
+    color: black;
+    overflow: hidden;
+    vertical-align: middle;
+    display: inline-block; 
+    width: 180px;
+    height: 17px;
+    transition: background-color .25s ease-in-out;
+    &:hover {
+        background-color: rgb(118, 118, 237);
+    }
+}
+
+.Latest_Ver .circle {
+    background-color: rgb(105, 105, 211);
+    border-radius: 10px;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    /*animation-name: slideAndFade;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;*/
+}
+
+.Latest_Ver span {
+    position: absolute;
+    z-index: 1;
+    user-select: none; 
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.Downloads {
+    position: relative;
+    background-color: rgb(127, 127, 255);
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+    text-decoration: none;
+    color: black;
+    overflow: hidden;
+    vertical-align: middle;
+    display: inline-block; 
+    width: 180px;
+    height: 17px;
+    cursor: pointer;
+    transition: background-color .25s ease-in-out;
+    &:hover {
+        background-color: rgb(118, 118, 237);
+    }
+}
+
+.Downloads .circle {
+    background-color: rgb(105, 105, 211);
+    border-radius: 10px;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    /*animation-name: slideAndFade;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;*/
+}
+
+.Downloads span {
+    position: absolute;
+    z-index: 1;
+    user-select: none; 
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.animate {
+    animation-name: slideAndFade;
+    animation-duration: .75s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+}
+
+header {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background-color: rgb(113, 113, 227);
+    width: 100%;
+    height: 40px;
+}
+
+@keyframes slideAndFade {
+    0% {
+        opacity: 0;
+        width: 0%;
+        height: 0%;
+    }
+    
+    40% {
+        top: 0%;
+        left: 0%;
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    75% {
+        top: 0%;
+        left: 0%;
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    100% {
+        top: 0%;
+        left: 0%;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+    }
 }
