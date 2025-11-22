@@ -1,4 +1,4 @@
-const CACHE_NAME = 'btdpe-cached-version-v1';
+const CACHE_NAME = 'btdpe-cached-version';
 const OFFLINE_URL = '/OFFLINE.html';
 const UNKNOWN_PAGE_URL = '/UNKNOWN.html';
 const URLS_TO_CACHE = [
