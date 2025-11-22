@@ -2,6 +2,6 @@
 
 Click [here](/BTDPE.html) to go to the BTDPE (Bananakitssu's 3D Python Engine) homepage
 
-**Updates**
+**BTDPE Updates**
 
 - 3D Update
