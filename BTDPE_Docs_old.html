@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BTDPE Developer - Documentation</title>
+        <link rel="icon" type="image/x-icon" href="/BTDPE.png">
+        <style>
+            * {
+                font-family: Arial, sans-serif;
+            }
+
+            body {
+                background-color: rgb(35, 35, 35);
+            }
+
+            span {
+                font-family: sans-serif;
+            }
+
+            code {
+                background-color: whitesmoke;
+                padding: 10px 10px 10px 10px;
+                border-radius: 10px;
+                display: block;
+                overflow: hidden;
+                font-family: Consolas, 'Courier New', monospace;
+                span {
+                    font-family: Consolas, 'Courier New', monospace;
+                    &#color_orange {
+                        color: orange;
+                    }
+                    &#color_red {
+                        color: red;
+                    }
+                }
+                #code_element {
+                    font-family: Consolas, 'Courier New', monospace;
+                    overflow: scroll;
+                    display: block;
+                    overflow-y: hidden;
+                    padding: 5px 5px 5px 5px;
+                    background-color: rgb(236, 236, 236);
+                    border-radius: 10px;
+                }
+
+                #code_management {
+                    margin-top: 10px;
+                    background-color: rgb(236, 236, 236);
+                    width: 98.25%;
+                    height: 20px;
+                    border-radius: 10px;
+                    padding: 5px 5px 5px 5px;
+                    #code_copy_button {
+                        display: block;
+                        position: relative;
+                        border: none;
+                        background-color: rgb(219, 219, 219);
+                        border-radius: 10px;
+                        padding: 5px 5px 5px 5px;
+                        top: -39.5px;
+                        left: -2px;
+                        font-family: sans-serif;
+                        cursor: pointer;
+                        transition: background-color 0.25s ease-in-out;
+                        &:hover {
+                            background-color: rgb(201, 201, 201);;
+                        }
+                    }
+                }
+
+                ::-webkit-scrollbar {
+                    width: 10px;
+                    height: 7.5px;
+                }
+
+                ::-webkit-scrollbar-track {
+                    background: #e8e8e8;
+                    border-radius: 10px;
+                }
+
+                ::-webkit-scrollbar-thumb {
+                    background: #888;
+                    border-radius: 10px;
+                    &:hover {
+                        background-color: #555;
+                        border-radius: 10px;
+                    }
+                }
+
+                /*::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                    border-radius: 10px;
+                }*/
+            }
+
+            header {
+                position: absolute;
+                top: 0%;
+                left: 0%;
+                background-color: rgb(113, 113, 227);
+                width: 100%;
+                height: 40px;
+            }
+
+            #note_text {
+                color: white;
+                background-color: rgb(81, 81, 81);
+                display: block;
+                border-radius: 10px;
+                padding: 5px 5px 5px 5px;
+                font-size: 100%;
+                span {
+                    display: block;
+                }
+                #info_circle {
+                    display: inline-block;
+                    background-color: rgb(85, 131, 159);
+                    border: 3px solid rgb(39, 61, 74);
+                    border-radius: 100%;
+                    width: 17.5px;
+                    height: 17.5px;
+                    margin-right: 5px;
+                    span {
+                        width: 100%;
+                        height: 100%;
+                        text-align: center;
+                    }
+                }
+                span#blue {
+                    display: inline-block;
+                    color: rgb(93, 93, 255);
+                }
+            }
+
+            #warn_text {
+                color: white;
+                background-color: rgb(81, 81, 81);
+                display: block;
+                border-radius: 10px;
+                padding: 5px 5px 5px 5px;
+                font-size: 100%;
+                span#text {
+                    display: block;
+                }
+                span#yellow {
+                    display: inline-block;
+                    color: rgb(239, 194, 97);
+                }
+            }
+
+            #text_header {
+                color: white;
+                font-size: 175%;
+            }
+
+            #text {
+                color: white;
+                font-size: 100%;
+            }
+
+            #warn {
+                color: rgb(255, 225, 0);
+                font-size: 125%;
+            }
+
+            .container {
+                display: block;
+                position: relative;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <header><img src="BTDPE.png" width="40" height="40" onclick="window.location.href = 'BTDPE.html'" style="cursor: pointer;"><span style="position: absolute;margin-top: 12px; color: white;">BTDPE Developer</span></header>
+        <br><br>
+        <div class="container">
+            <span id="text_header">HOW TO SETUP BTDPE (OPEN-SOURCE VERSION)</span>
+            <br>
+            <span id="warn">Warning: BTDPE is not recommended to be used yet. Errors are expected.</span>
+            <br>
+            <span id="text">Setting up BTDPE is easy. You must have a python file that runs BTDPE. That file must contain:</span>
+            <pre><code class="language-python" data="import BTDPE_v1_0_0_Beta as BTDPE
+import turtle
+
+# Your code here
+
+BTDPE.register_turtle(turtle) # This starts a loop and starts rendering. This might be changed in the future."><span style="margin-bottom: 5px; display: block;">Python</span><div id="code_element"><span id="color_orange">import</span> BTDPE_v1_0_0_Beta <span id="color_orange">as</span> BTDPE
+<span id="color_orange">import</span> turtle
+
+<span id="color_red"># Your code here</span>
+
+BTDPE.register_turtle(turtle) <span id="color_red"># This starts a loop and starts rendering. This might be changed in the future.</span></div><div id="code_management">
+    <button id="code_copy_button">Copy</button>
+</div></code></pre><br>
+            <span id="note_text">
+                <span><div id="info_circle"><span>i</span></div><span id="blue">Note:</span> When using BTDPE, your BTDPE module must be in the same directory as your python file that runs BTDPE and in that same directory you'll need a folder called 'BTDPE_Cache'</span>
+            </span><br><br>
+            <span id="warn_text">
+                <span id="yellow">WARNING:</span><span id="text"> Do NOT use any code after and do not put a loop before registering the turtle to BTDPE. If you put the loop before registering, BTDPE won't get to register your turtle. If you put any code after registering your turtle BTDPE will IGNORE it. (This might be changed in the future)</span>
+            </span><br>
+            <!--<span id="text">Explaination: 'import BTDPE_v1_0_0_Beta' imports the module (You must adjust it according to the BTDPE module name) and names it as BTDPE.<br>'import turtle' imports the python turtle graphics from the python library.<br>'BTDPE.register_turtle(turtle)' registers the current turtle and starts rendering using the turtle (Any looping before registering the turtle could stop BTDPE from rendering. This might be changed in the future)</span>-->
+            <!--<br><br>-->
+            <span id="text_header">HOW TO MAKE A CUBE IN BTDPE</span><br>
+            <span id="text">To make a cube in BTDPE you must use this function:</span>
+            <pre><code class="language-python" data="BTDPE.create_mesh(meshType, name, position, size, orientation, shadersAllowed, allShaders, shaderType, castShadows, receiveShadows, textureClass, color, attributes, textures)"><span style="margin-bottom: 5px; display: block;">Python</span><div id="code_element">BTDPE.create_mesh(meshType, name, position, size, orientation, shadersAllowed, allShaders, shaderType, castShadows, receiveShadows, textureClass, color, attributes, textures)</span></div><div id="code_management">
+            <button id="code_copy_button">Copy</button>
+            </div></code></pre><br>
+            <span id="note_text"><span><div id="info_circle"><span>i</span></div><span id="blue">Note:</span> The only mesh types are: Cube in v1.0.0 Beta</span></span><br>
+            <span id="note_text"><span><div id="info_circle"><span>i</span></div><span id="blue">Note:</span> The "shadersAllowed", "allShaders", "shaderType", "castShadows", "receiveShadows", "textureClass", "textures" and "orientation" in this function does NOT work in v1.0.0 Beta</span></span><br>
+            <span id="text">Example:</span>
+            <pre><code class="language-python" data='BTDPE.create_mesh("cube", "MyCube", {"x": 0, "y": 0, "z": 0}, {"x": 1, "y": 1, "z": 1}, {"x": 0, "y": 0, "z": 0}, False, [], "", False, False, [], {"r": 0, "g": 0, "b": 0}, {"canTransparent": False, "visible": True, "opacity": 1}, [])'><span style="margin-bottom: 5px; display: block;">Python</span><div id="code_element">BTDPE.create_mesh("cube", "MyCube", {"x": 0, "y": 0, "z": 0}, {"x": 1, "y": 1, "z": 1}, {"x": 0, "y": 0, "z": 0}, False, [], "", False, False, [], {"r": 0, "g": 0, "b": 0}, {"canTransparent": False, "visible": True, "opacity": 1}, [])</div><div id="code_management">
+        <button id="code_copy_button">Copy</button>
+    </div></code></pre><br>
+            <span id="text">This makes a cube mesh named MyCube.</span>
+        </div>
+
+        <script src="BTDPE_Docs.js"></script>
+    </body>
+</html>

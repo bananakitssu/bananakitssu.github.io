@@ -34,6 +34,11 @@ global FOV
 global added_shaders
 global applied_shaders
 global cache
+global fps
+global fake_fps
+import time
+fps = 0
+fake_fps = 0
 meshesShown = 0
 points = 0
 wireframeThickness = 3
@@ -71,6 +76,25 @@ for filename in os.listdir(folder_path):
             print(f"Could not read {filename}: {e}")
 
 print(cache_files)
+
+def count_fps ():
+    global fake_fps
+    while True:
+        fake_fps = fake_fps + 1
+        time.sleep(0.000001)
+
+def fps_set ():
+    global fake_fps
+    global fps
+    while True:
+        time.sleep(1)
+        fps = fake_fps
+        fake_fps = 0
+
+fps_thread1 = threading.Thread(target=count_fps)
+fps_thread2 = threading.Thread(target=fps_set)
+fps_thread1.start()
+fps_thread2.start()
 
 cameraData = {"dookie": {"for": "dookie", "x": 0, "y": 0, "z": 0}}
 meshes = { \
@@ -146,13 +170,12 @@ def set_resolution (width=900, height=500, BTDPE_Turtle=None):
     BTDPE_Turtle.setup(width, height)
 
 def get_vsync_value ():
-    #import pygame
-    #pygame.init()
-    #info = pygame.display.Info()
-    #vsync = info.current_h
-    #pygame.quit()
-    #return vsync
-    return
+    import pygame
+    pygame.init()
+    info = pygame.display.Info()
+    vsync = info.current_h
+    pygame.quit()
+    return vsync
 
 def left_arrow ():
     global CamRotY
@@ -191,12 +214,21 @@ def down_arrow ():
 #    def add_mesh ():
 #        print('meshii')
 
-#def create_mesh (meshType, name, position, size, orientation, shadersAllowed, allShaders, shaderType, castShadows, receiveShadows, textureClass, \
-                 #color, attributes):
+def create_mesh (meshType, name, position, size, orientation, shadersAllowed, allShaders, shaderType, castShadows, receiveShadows, textureClass, \
+                 color, attributes, textures):
     """Creates A Mesh And Adds It To The Scene."""
-   # if meshType == "cube":
-        #if position and size and orientation:
-            #meshes.append("name": name, "type": meshType, "position": {"x": position.x, "y"}
+    if meshType == "cube":
+        if position and size and orientation:
+            meshes[name] = {"name": name, "type": meshType, "shadersEnabled": shadersAllowed, "mesh_position": {"x": position["x"], "y": position["y"], "z": position["z"]}, \
+                          "edges": { \
+            "2": {"x": 0.001, "y": 0.001, "z": 0.001}, "3":{"x": 0.001, "y": -0.001, "z": 0.001}, \
+            "6": {"x": 0.001, "y": -0.001, "z": -0.001}, "4": {"x": -0.001, "y": -0.001, "z": 0.001}, \
+            "7": {"x": 0.001, "y": 0.001, "z": -0.001}, "8": {"x": -0.001, "y": 0.001, "z": -0.001}, \
+            "5": {"x": -0.001, "y": -0.001, "z": -0.001}, "1": {"x": -0.001, "y": 0.001, "z": 0.001}}, \
+                          "mesh_rotation": orientation, "mesh_size": size, "textures": textures, "mesh_color_r": color["r"], "mesh_color_g": color["g"], \
+                          "mesh_color_b": color["b"], "mesh_attributes": attributes}
+            registered_meshes.append(name)
+                          
 
 def get_file_data (file_path):
     return None
@@ -606,7 +638,8 @@ def draw (t):
     global meshesShown
     meshesShown = 0
     points = 0
-    t.getscreen().tracer(3000)
+    #t.getscreen().tracer(3000)
+    t.getscreen().tracer(18000)
     t.clear()
     t.penup()
     counted = 0
@@ -783,6 +816,8 @@ def draw (t):
                 #CamX += 0.01
             
             #draw(t)
+global timerOn
+global elapsed_time
 
 timerOn = False
 elapsed_time = 0
@@ -790,6 +825,13 @@ elapsed_time = 0
 global limit_fps
 
 limit_fps = 60
+
+import asyncio
+
+async def wait_example(time_sec):
+    print("Waiting asynchronously...")
+    await asyncio.sleep(time_sec)
+    print("Done!")
 
 def add_draw_time ():
     import time
@@ -814,6 +856,19 @@ def start_draw_timer ():
     elapsed_time = 0
     add_draw_time()
 
+global frameFunctions
+frameFunctions = []
+
+def afterFrame ():
+    global frameFunctions
+    for counter in range(0, len(frameFunctions)):
+        function = frameFunctions[counter]
+        function()
+
+def addAfterFrame (func):
+    global frameFunctions
+    frameFunctions.append(func)
+
 def request_draw_3D (t):
     #t.onkey(w, 'w')
     #t.listen()
@@ -823,6 +878,7 @@ def request_draw_3D (t):
     global CamX
     global CamY
     global CamZ
+    global fps
     if drawing:
         return
     #start_draw_timer()
@@ -844,9 +900,11 @@ def request_draw_3D (t):
     drawing = False
     stop_draw_timer()
     t.goto(-435, -240)
-    t.write(f"FPS: {round(limit_fps / ((elapsed_time / 1000) + 1))} / {round(limit_fps / 1)}", False, 'left', font=('Fredoka One', 10, 'normal'))
-    print(f'Requested and ended in {elapsed_time}ms. FPS: {limit_fps / ((elapsed_time / 1000) + 1)}')
+    #t.write(f"FPS: {round(limit_fps / ((elapsed_time / 1000) + 1))} / {round(limit_fps / 1)}", False, 'left', font=('Fredoka One', 10, 'normal'))
+    t.write(f"FPS: {fps} / {round(limit_fps / 1)}", False, 'left', font=('Fredoka One', 10, 'normal'))
+    print(f'Requested and ended in {elapsed_time}ms. FPS: {fps}')
     #request_draw_3D(t)
+    afterFrame()
 
 def catch_cache (t):
     t.getscreen().tracer(3000)
@@ -866,6 +924,24 @@ def catch_cache (t):
     while True:
         t.color('gray')
 
+def open_starter_screen (t):
+    t.getscreen().tracer(3000)
+    t.penup()
+    t.hideturtle()
+    t.color('gray')
+    t.goto(0 - (900 / 2), 0 - (700 / 2))
+    t.begin_fill()
+    t.forward(900)
+    t.right(90)
+    t.forward(700)
+    t.right(90)
+    t.forward(900)
+    t.right(90)
+    t.forward(700)
+    t.end_fill()
+    ms = 0
+    
+
 def main (t):
     request_draw_3D(t)
     main(t)
@@ -881,7 +957,7 @@ def createLine (x1, y1, x2, y2, color, thickness):
     turtle.goto(x1, y1)
     turtle.pendown()
     turtle.goto(x2, y2)
-    turtle.penup()
+    turtle.penup()    
 
 def register_turtle (given_turtle):
     print("Initalizing Turtle...")
@@ -900,7 +976,8 @@ def register_turtle (given_turtle):
         #startListening(turtle)
         isTurtleRegistered = True
         print("Initalized Turtle.")
-        catch_cache(turtle)
+        #catch_cache(turtle)
+        open_starter_screen(turtle)
         main(turtle)
         #request_draw_3D(turtle)
         #mainThread = threading.Thread(target=main, args=([turtle]))
@@ -921,6 +998,13 @@ def create3D (x, y, z, angle):
     if hasCamera == True and isConfigured == False and turtle != "N/A" and isTurtleRegistered == True:
         print('Creating 3D')
         print('Created 3D')
+
+import turtle
+
+if __name__ == "__main__":
+    turtle.bgcolor('black')
+    register_turtle(turtle)
+    
 """import turtle
 import math
 

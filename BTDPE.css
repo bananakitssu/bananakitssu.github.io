@@ -1,5 +1,6 @@
 * {
     font-family: Arial, sans-serif;
+    color: rgb(70, 70, 70);
 }
 
 .Latest_Ver {
@@ -96,6 +97,126 @@ header {
     width: 100%;
     height: 40px;
 }
+
+.img_container_ {
+    display: inline-block;
+}
+
+.download {
+    color: white;
+    margin-top: 6px;
+    text-decoration: none;
+    padding: 5px 15px;
+    border-radius: 30px;
+    background-color: rgb(86, 86, 171);
+    transition: background-color 0.5s ease-in-out;
+    pointer-events: auto;
+    &:hover {
+        background-color: rgb(60, 60, 124);
+    }
+}
+
+header #wrap {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    left: 0;
+    width: 97.5%;
+    top: 0;
+    pointer-events: none;
+}
+
+.docs {
+    color: white;
+    margin-top: 6px;
+    text-decoration: none;
+    padding: 5px 15px;
+    border-radius: 30px;
+    background-color: rgb(86, 86, 171);
+    transition: background-color 0.5s ease-in-out;
+    margin-right: 110px;
+    pointer-events: auto;
+    &:hover {
+        background-color: rgb(60, 60, 124);
+    }
+}
+
+header #wrap2 {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    left: 0;
+    width: 97.5%;
+    top: 0;
+    pointer-events: none;
+}
+
+#ver {
+    color: rgb(118, 118, 118);
+}
+
+/*@media screen and (max-width: 700px) {
+    .img_container_ {
+        display: flex;
+        width: 100%;
+        height: 100%;
+
+    }
+    header {
+        width: 100%;
+    }
+    .docs {
+        margin-left: 70%;
+    }
+}*/
+
+/* CSS */
+.loader {
+  width: 100vw;
+  height: 100vh;
+  margin-top: 0px;
+  top: 0;
+  left: 0;
+  background-color: white;
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  text-align: center;
+  transform: opacity 0.5s ease-in-out;
+}
+
+.spinner {
+  width: 35%;
+  height: 35%;
+  display: block;
+  margin: 0 auto;
+  animation: rotate /*1.3s*/1.3s linear infinite;
+}
+
+.path {
+  stroke: #2189ff;              /* single color */
+  stroke-linecap: round;
+  stroke-dasharray: 90, 150; /* smoother arc length */
+  stroke-dashoffset: 0;
+  animation: dash /*1.3s*/1.3s ease-in-out infinite;
+}
+
+/* Rotate the whole SVG continuously */
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+/* Smooth arc expansion/contraction */
+@keyframes dash {
+  0%   { stroke-dasharray: 1, 200; stroke-dashoffset: 0; }
+  50%  { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+  100% { stroke-dasharray: 1, 200; stroke-dashoffset: -125; }
+}
+
 
 @keyframes slideAndFade {
     0% {
