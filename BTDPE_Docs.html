@@ -232,6 +232,30 @@
                         margin-bottom: 5px;
                         border-bottom: 1px solid black;
                     }
+                    span:nth-child(1) {
+                        &::before {
+                            font-weight: bold;
+                            content: "Argrument: ";
+                        }
+                    }
+                    span:nth-child(2) {
+                        &::before {
+                            font-weight: bold;
+                            content: "Type: ";
+                        }
+                    }
+                    span:nth-child(3) {
+                        &::before {
+                            font-weight: bold;
+                            content: "Description: ";
+                        }
+                    }
+                    span:nth-child(4) {
+                        &::before {
+                            font-weight: bold;
+                            content: "Works? ";
+                        }
+                    }
                 }
                 #table #data span {
                     width: 100% !important;
