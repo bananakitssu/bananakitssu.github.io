@@ -155,20 +155,129 @@ header #wrap2 {
     color: rgb(118, 118, 118);
 }
 
-/*@media screen and (max-width: 700px) {
+#info_ {
+    margin-top: 35px;
+}
+
+#description_ {
+    position: absolute;
+    width:370px;
+    margin-left: 215px;
+    margin-top: -110px;
+}
+
+.Latest_Ver {
+    position: absolute;
+    margin-top: 60px;
+    margin-left: 10px;
+}
+
+.Downloads {
+    position: absolute;
+    margin-top: 60px;
+    margin-left: 210px
+}
+
+body {
+    pointer-events: none;
+}
+
+html {
+    pointer-events: none;
+}
+
+.container_ {
+    pointer-events: auto;
+}
+
+.wrap_ {
+    display: inline;
+}
+
+.wrap_2_ {
+    display: inline;
+}
+
+@media screen and (max-width: 700px) {
     .img_container_ {
         display: flex;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 200px;
+        margin-top: 10px;
+        justify-content: center;
+    }
+    #name_ {
+        margin-top: 10px;
+        text-align: center;
+        width: 97vw;
+    }
+    #info_ {
+        margin-top: 45px;
+        text-align: center;
+        width: 97vw;
+    }
+    #description_ {
+        margin-left: 2.5%;
+        margin-right: 0;
+        margin-top: 67.5px;
+        margin-bottom: 0;
+        text-align: center;
+        width: 95%;
+    }
+    .Latest_Ver {
+        margin-top: 175px;
+        
+    }
+    .Downloads {
+        margin-top: 175px;
+    }
+    .Latest_Ver {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .wrap_ {
+        margin-top: 175px;
+        display: flex;
+        position: absolute;
+        width: 100vw;
+        height: 17px;
+        justify-content: left;
+    }
+    .Downloads {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-right: 7px;
+    }
+    .wrap_2_ {
+        margin-top: 175px;
+        display: flex;
+        position: absolute;
+        width: 100vw;
+        height: 17px;
+        justify-content: right;
+    }
+    .container_ {
+        left: 0;
+    }
+}
 
+@media screen and (max-width: 400px) {
+    .wrap_ {
+        margin-top: 185px;
+        justify-content: center;
     }
-    header {
-        width: 100%;
+    .wrap_2_ {
+        margin-top: 220px;
+        justify-content: center;
     }
-    .docs {
-        margin-left: 70%;
+    .Latest_Ver {
+        margin-left: 0px;
     }
-}*/
+    .Downloads {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
 
 /* CSS */
 .loader {
