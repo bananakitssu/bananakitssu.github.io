@@ -18,5 +18,5 @@ Click [here](#/BTDPE.html) to go to the BTDPE (Bananakitssu's 3D Python Engine) 
 
 ![Swiq](https://github.com/bananakitssu/Swiq/blob/main/assets/Swiq.svg)
 
-Click [here](#/Swiq) to go to the Swiq homepage
-Or click [here](https://github.com/bananakitssu/Swiq) for the GitHub repo
+Click [here](#/Swiq) to go to the Swiq homepage.
+Or click [here](https://github.com/bananakitssu/Swiq) for the GitHub repo.
