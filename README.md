@@ -14,7 +14,7 @@ Click [here](#/BTDPE.html) to go to the BTDPE (Bananakitssu's 3D Python Engine) 
 
 ---
 
-**Swiq**
+**Swiq programming language**
 
 ![Swiq](https://github.com/bananakitssu/Swiq/blob/main/assets/Swiq.svg)
 
