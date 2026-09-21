@@ -52,30 +52,41 @@ registeredAfterDraw = False
 isConfigured = False
 hasCamera = False
 revered = True
-cameras = {"dookie": "Camera"}
+cameras = {"main": "Camera"}
 cache_files = []
-# cache = io.FileIO(file='BTDPE_Cache')
 import os
 
-# Specify the folder path
 folder_path = "BTDPE_Cache"
+os.makedirs(folder_path, exist_ok=True)
 
-# Iterate through all files in the folder
-for filename in os.listdir(folder_path):
-    file_path = os.path.join(folder_path, filename)
-    
-    # Check if it's a file (not a directory)
-    if os.path.isfile(file_path):
+
+def _load_cache():
+    """Load cached files into memory."""
+    cache_files.clear()
+
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+
+        if not os.path.isfile(file_path):
+            continue
+
         try:
-            # Open and read the file
-            with open(file_path, 'r', encoding='utf-8') as file:
+            with open(file_path, "r", encoding="utf-8") as file:
                 data = file.read()
-                cache_files.append({'file-path': f'{folder_path}/{filename}', 'name': filename, 'folder-path': folder_path, 'cache': file.read()})
-                print(f"Contents of {filename}:\n{data}\n")
-        except Exception as e:
-            print(f"Could not read {filename}: {e}")
 
-print(cache_files)
+            cache_files.append(
+                {
+                    "file-path": file_path,
+                    "name": filename,
+                    "folder-path": folder_path,
+                    "cache": data,
+                }
+            )
+        except (OSError, UnicodeError) as error:
+            print(f"Could not read cache file {filename}: {error}")
+
+
+_load_cache()
 
 def count_fps ():
     global fake_fps
@@ -96,7 +107,7 @@ fps_thread2 = threading.Thread(target=fps_set)
 fps_thread1.start()
 fps_thread2.start()
 
-cameraData = {"dookie": {"for": "dookie", "x": 0, "y": 0, "z": 0}}
+cameraData = {"main": {"for": "main", "x": 0, "y": 0, "z": 0}}
 meshes = { \
         "cube": {"name": "cube", "type": "cube", "shaders_enabled": False, "edges": { \
             "2": {"x": 0.001, "y": 0.001, "z": 0.001}, "3":{"x": 0.001, "y": -0.001, "z": 0.001}, \
@@ -230,8 +241,40 @@ def create_mesh (meshType, name, position, size, orientation, shadersAllowed, al
             registered_meshes.append(name)
                           
 
-def get_file_data (file_path):
-    return None
+def get_file_data(file_path):
+    """Read a file using the persistent BTDPE cache."""
+    requested_path = os.path.abspath(file_path)
+
+    for cached in cache_files:
+        if cached["name"] == os.path.basename(requested_path):
+            return cached["cache"]
+
+    try:
+        with open(requested_path, "r", encoding="utf-8") as file:
+            data = file.read()
+    except (OSError, UnicodeError) as error:
+        print(f"Could not read {file_path}: {error}")
+        return None
+
+    cache_path = os.path.join(folder_path, os.path.basename(requested_path))
+
+    try:
+        with open(cache_path, "w", encoding="utf-8") as file:
+            file.write(data)
+    except (OSError, UnicodeError) as error:
+        print(f"Could not write cache for {file_path}: {error}")
+        return data
+
+    cache_files.append(
+        {
+            "file-path": cache_path,
+            "name": os.path.basename(requested_path),
+            "folder-path": folder_path,
+            "cache": data,
+        }
+    )
+
+    return data
 
 def apply_shader (name):
     """Applies A Shader For The Engine"""
@@ -265,347 +308,55 @@ def create_shader (name, data):
         else:
             return {"worked?": False, "msg": "No Given Data."}
 
-def get_point_position (pointNumber, mesh):
-    """Gets The Mesh's Real Point Position."""
-    global CamRotX
-    global CamRotY
-    global CamRotZ
-    if pointNumber == 1:
-        point = mesh["edges"]["1"]
-        x = mesh["mesh_position"]["x"] + point["x"]
-        y = mesh["mesh_position"]["y"] + point["y"]
-        z = mesh["mesh_position"]["z"] + point["z"]
-        if point["x"] > 0.000:
-            y -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] > 0.000:
-                x += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        else:
-            y += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] < 0.000:
-                x -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        if point["z"] > 0.000:
-            x -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        else:
-            y += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        if point["z"] > 0.000:
-            y -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        else:
-            y += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        if point['x'] > 0.000:
-            x += mesh['mesh_size']['x'] / 2
-        else:
-            x -= mesh['mesh_size']['x'] / 2
-        if point['y'] > 0.000:
-            y += mesh['mesh_size']['y'] / 2
-        else:
-            y -= mesh['mesh_size']['y'] / 2
-        if point['z'] > 0.000:
-            z += mesh['mesh_size']['z'] / 2
-        else:
-            z -= mesh['mesh_size']['z'] / 2
-        return {"x": x, "y": y, "z": z}
-    elif pointNumber == 2:
-        point = mesh["edges"]["2"]
-        x = mesh["mesh_position"]["x"] + point["x"]
-        y = mesh["mesh_position"]["y"] + point["y"]
-        z = mesh["mesh_position"]["z"] + point["z"]
-        if point["x"] > 0.000:
-            y -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] > 0.000:
-                x += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        else:
-            y += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] < 0.000:
-                x -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        if point["z"] > 0.000:
-            x -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        else:
-            y += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        if point["z"] > 0.000:
-            y -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        else:
-            y += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        if point['x'] > 0.000:
-            x += mesh['mesh_size']['x'] / 2
-        else:
-            x -= mesh['mesh_size']['x'] / 2
-        if point['y'] > 0.000:
-            y += mesh['mesh_size']['y'] / 2
-        else:
-            y -= mesh['mesh_size']['y'] / 2
-        if point['z'] > 0.000:
-            z += mesh['mesh_size']['z'] / 2
-        else:
-            z -= mesh['mesh_size']['z'] / 2
-        return {"x": x, "y": y, "z": z}
-    elif pointNumber == 3:
-        point = mesh["edges"]["3"]
-        x = mesh["mesh_position"]["x"] + point["x"]
-        y = mesh["mesh_position"]["y"] + point["y"]
-        z = mesh["mesh_position"]["z"] + point["z"]
-        if point["x"] > 0.000:
-            y -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] > 0.000:
-                x += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        else:
-            y += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] < 0.000:
-                x -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        if point["z"] > 0.000:
-            x -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        else:
-            y += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        if point["z"] > 0.000:
-            y -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        else:
-            y += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        if point['x'] > 0.000:
-            x += mesh['mesh_size']['x'] / 2
-        else:
-            x -= mesh['mesh_size']['x'] / 2
-        if point['y'] > 0.000:
-            y += mesh['mesh_size']['y'] / 2
-        else:
-            y -= mesh['mesh_size']['y'] / 2
-        if point['z'] > 0.000:
-            z += mesh['mesh_size']['z'] / 2
-        else:
-            z -= mesh['mesh_size']['z'] / 2
-        return {"x": x, "y": y, "z": z}
-    elif pointNumber == 4:
-        point = mesh["edges"]["4"]
-        x = mesh["mesh_position"]["x"] + point["x"]
-        y = mesh["mesh_position"]["y"] + point["y"]
-        z = mesh["mesh_position"]["z"] + point["z"]
-        if point["x"] > 0.000:
-            y -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] > 0.000:
-                x += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        else:
-            y += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] < 0.000:
-                x -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        if point["z"] > 0.000:
-            x -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        else:
-            y += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        if point["z"] > 0.000:
-            y -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        else:
-            y += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        if point['x'] > 0.000:
-            x += mesh['mesh_size']['x'] / 2
-        else:
-            x -= mesh['mesh_size']['x'] / 2
-        if point['y'] > 0.000:
-            y += mesh['mesh_size']['y'] / 2
-        else:
-            y -= mesh['mesh_size']['y'] / 2
-        if point['z'] > 0.000:
-            z += mesh['mesh_size']['z'] / 2
-        else:
-            z -= mesh['mesh_size']['z'] / 2
-        return {"x": x, "y": y, "z": z}
-    elif pointNumber == 5:
-        point = mesh["edges"]["5"]
-        x = mesh["mesh_position"]["x"] + point["x"]
-        y = mesh["mesh_position"]["y"] + point["y"]
-        z = mesh["mesh_position"]["z"] + point["z"]
-        if point["x"] > 0.000:
-            y -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] > 0.000:
-                x += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        else:
-            y += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] < 0.000:
-                x -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        if point["z"] > 0.000:
-            x -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        else:
-            y += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        if point["z"] > 0.000:
-            y -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        else:
-            y += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        if point['x'] > 0.000:
-            x += mesh['mesh_size']['x'] / 2
-        else:
-            x -= mesh['mesh_size']['x'] / 2
-        if point['y'] > 0.000:
-            y += mesh['mesh_size']['y'] / 2
-        else:
-            y -= mesh['mesh_size']['y'] / 2
-        if point['z'] > 0.000:
-            z += mesh['mesh_size']['z'] / 2
-        else:
-            z -= mesh['mesh_size']['z'] / 2
-        return {"x": x, "y": y, "z": z}
-    elif pointNumber == 6:
-        point = mesh["edges"]["6"]
-        x = mesh["mesh_position"]["x"] + point["x"]
-        y = mesh["mesh_position"]["y"] + point["y"]
-        z = mesh["mesh_position"]["z"] + point["z"]
-        if point["x"] > 0.000:
-            y -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] > 0.000:
-                x += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        else:
-            y += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] < 0.000:
-                x -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        if point["z"] > 0.000:
-            x -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        else:
-            y += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        if point["z"] > 0.000:
-            y -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        else:
-            y += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        if point['x'] > 0.000:
-            x += mesh['mesh_size']['x'] / 2
-        else:
-            x -= mesh['mesh_size']['x'] / 2
-        if point['y'] > 0.000:
-            y += mesh['mesh_size']['y'] / 2
-        else:
-            y -= mesh['mesh_size']['y'] / 2
-        if point['z'] > 0.000:
-            z += mesh['mesh_size']['z'] / 2
-        else:
-            z -= mesh['mesh_size']['z'] / 2
-        return {"x": x, "y": y, "z": z}
-    elif pointNumber == 7:
-        point = mesh["edges"]["7"]
-        x = mesh["mesh_position"]["x"] + point["x"]
-        y = mesh["mesh_position"]["y"] + point["y"]
-        z = mesh["mesh_position"]["z"] + point["z"]
-        if point["x"] > 0.000:
-            y -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] > 0.000:
-                x += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        else:
-            y += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] < 0.000:
-                x -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        if point["z"] > 0.000:
-            x -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        else:
-            y += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        if point["z"] > 0.000:
-            y -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        else:
-            y += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        if point['x'] > 0.000:
-            x += mesh['mesh_size']['x'] / 2
-        else:
-            x -= mesh['mesh_size']['x'] / 2
-        if point['y'] > 0.000:
-            y += mesh['mesh_size']['y'] / 2
-        else:
-            y -= mesh['mesh_size']['y'] / 2
-        if point['z'] > 0.000:
-            z += mesh['mesh_size']['z'] / 2
-        else:
-            z -= mesh['mesh_size']['z'] / 2
-        return {"x": x, "y": y, "z": z}
-    elif pointNumber == 8:
-        point = mesh["edges"]["8"]
-        x = mesh["mesh_position"]["x"] + point["x"]
-        y = mesh["mesh_position"]["y"] + point["y"]
-        z = mesh["mesh_position"]["z"] + point["z"]
-        if point["x"] > 0.000:
-            y -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] > 0.000:
-                x += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        else:
-            y += mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-            if point["y"] < 0.000:
-                x -= mesh["mesh_rotation"]["z"] * 2 - (CamRotZ * 2)
-        if point["z"] > 0.000:
-            x -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        else:
-            y += mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["y"] * 2 - (CamRotY * 2)
-        if point["z"] > 0.000:
-            y -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] > 0.000:
-                z += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        else:
-            y += mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-            if point["y"] < 0.000:
-                z -= mesh["mesh_rotation"]["x"] * 2 - (CamRotX * 2)
-        if point['x'] > 0.000:
-            x += mesh['mesh_size']['x'] / 2
-        else:
-            x -= mesh['mesh_size']['x'] / 2
-        if point['y'] > 0.000:
-            y += mesh['mesh_size']['y'] / 2
-        else:
-            y -= mesh['mesh_size']['y'] / 2
-        if point['z'] > 0.000:
-            z += mesh['mesh_size']['z'] / 2
-        else:
-            z -= mesh['mesh_size']['z'] / 2
-        return {"x": x, "y": y, "z": z}
+def get_point_position(pointNumber, mesh):
+    """Return the world-space position of one mesh vertex."""
+    if not isinstance(mesh, dict) or "edges" not in mesh:
+        return None
+
+    point = mesh["edges"].get(str(pointNumber))
+    if point is None:
+        return None
+
+    rotation_z = mesh["mesh_rotation"]["z"] * 2 - CamRotZ * 2
+    rotation_y = mesh["mesh_rotation"]["y"] * 2 - CamRotY * 2
+    rotation_x = mesh["mesh_rotation"]["x"] * 2 - CamRotX * 2
+
+    x = mesh["mesh_position"]["x"] + point["x"]
+    y = mesh["mesh_position"]["y"] + point["y"]
+    z = mesh["mesh_position"]["z"] + point["z"]
+
+    if point["x"] > 0.000:
+        y -= rotation_z
+        if point["y"] > 0.000:
+            x += rotation_z
+    else:
+        y += rotation_z
+        if point["y"] < 0.000:
+            x -= rotation_z
+
+    if point["z"] > 0.000:
+        x -= rotation_y
+        if point["y"] > 0.000:
+            z += rotation_y
+    else:
+        y += rotation_y
+        if point["y"] < 0.000:
+            z -= rotation_y
+
+    if point["z"] > 0.000:
+        y -= rotation_x
+        if point["y"] > 0.000:
+            z += rotation_x
+    else:
+        y += rotation_x
+        if point["y"] < 0.000:
+            z -= rotation_x
+
+    x += mesh["mesh_size"]["x"] / 2 if point["x"] > 0.000 else -mesh["mesh_size"]["x"] / 2
+    y += mesh["mesh_size"]["y"] / 2 if point["y"] > 0.000 else -mesh["mesh_size"]["y"] / 2
+    z += mesh["mesh_size"]["z"] / 2 if point["z"] > 0.000 else -mesh["mesh_size"]["z"] / 2
+
+    return {"x": x, "y": y, "z": z}
 
 def get_mesh_by_name (meshName):
     if meshes[meshName]:
@@ -627,195 +378,103 @@ def get_mesh_by_position (x, y, z):
 def is_touching_obj (obj):
     """Returns the obj that it is touching"""
 
-def draw (t):
-    global wireframeColor
-    global wireframeThickness
-    global revered
-    global CamX
-    global CamY
-    global CamZ
+def _project_point(point):
+    denominator = point["z"] + CamZ
+    return (
+        FOV * ((point["x"] - CamX) / denominator),
+        FOV * ((point["y"] - CamY) / denominator),
+    )
+
+
+def _draw_face(t, projected, point_numbers, color="red"):
+    t.fillcolor(color)
+    t.penup()
+    t.goto(*projected[point_numbers[0]])
+    t.begin_fill()
+    t.pendown()
+    for number in point_numbers[1:]:
+        t.goto(*projected[number])
+    t.goto(*projected[point_numbers[0]])
+    t.end_fill()
+    t.penup()
+
+
+def draw(t):
     global points
     global meshesShown
+
     meshesShown = 0
     points = 0
-    #t.getscreen().tracer(3000)
+
     t.getscreen().tracer(18000)
     t.clear()
     t.penup()
-    counted = 0
-    for counter in range(0, len(registered_meshes)):
-        counted += 1
-        meshName = registered_meshes[counter]
-        if meshes[meshName]:
-            #t.showturtle()
-            t.hideturtle()
-            t.width(wireframeThickness)
-            mesh = meshes[meshName]
-            print(mesh)
-            if mesh['type'] == "cube":
-                t.color(wireframeColor)
-                point1 = get_point_position(1, get_mesh_by_name(mesh["name"]))
-                point2 = get_point_position(2, get_mesh_by_name(mesh["name"]))
-                point3 = get_point_position(3, get_mesh_by_name(mesh["name"]))
-                point4 = get_point_position(4, get_mesh_by_name(mesh["name"]))
-                point5 = get_point_position(5, get_mesh_by_name(mesh["name"]))
-                point6 = get_point_position(6, get_mesh_by_name(mesh["name"]))
-                point7 = get_point_position(7, get_mesh_by_name(mesh["name"]))
-                point8 = get_point_position(8, get_mesh_by_name(mesh["name"]))
-                #t.tracer(100)
-                #if CamX - (mesh['mesh_position']['z'] + mesh['mesh_size']['z'] - 0.45) > 0:
-                if (FOV) * ((point1['x'] + (CamX)) / (point1['z'] + (CamZ))) > -450 and (FOV) * ((point1['y'] + (CamY)) / (point1['z'] + (CamZ))) > -250:
-                    points += len(mesh['edges'])
-                    meshesShown += 1
-                    t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                    #t.begin_fill()
-                    t.pendown()
-                    t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                    t.goto((FOV) * ((point3['x'] - (CamX)) / (point3['z'] + (CamZ))), (FOV) * ((point3['y'] - (CamY)) / (point3['z'] + (CamZ))))
-                    t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                    t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                    t.goto((FOV) * ((point6['x'] - (CamX)) / (point6['z'] + (CamZ))), (FOV) * ((point6['y'] - (CamY)) / (point6['z'] + (CamZ))))
-                    t.goto((FOV) * ((point7['x'] - (CamX)) / (point7['z'] + (CamZ))), (FOV) * ((point7['y'] - (CamY)) / (point7['z'] + (CamZ))))
-                    t.goto((FOV) * ((point8['x'] - (CamX)) / (point8['z'] + (CamZ))), (FOV) * ((point8['y'] - (CamY)) / (point8['z'] + (CamZ))))
-                    t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                    t.penup()
-                    t.goto((FOV) * ((point8['x'] - (CamX)) / (point8['z'] + (CamZ))), (FOV) * ((point8['y'] - (CamY)) / (point8['z'] + (CamZ))))
-                    t.pendown()
-                    t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                    t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                    t.goto((FOV) * ((point3['x'] - (CamX)) / (point3['z'] + (CamZ))), (FOV) * ((point3['y'] - (CamY)) / (point3['z'] + (CamZ))))
-                    t.goto((FOV) * ((point6['x'] - (CamX)) / (point6['z'] + (CamZ))), (FOV) * ((point6['y'] - (CamY)) / (point6['z'] + (CamZ))))
-                    t.penup()
-                    t.goto((FOV) * ((point7['x'] - (CamX)) / (point7['z'] + (CamZ))), (FOV) * ((point7['y'] - (CamY)) / (point7['z'] + (CamZ))))
-                    t.pendown()
-                    t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                    t.penup()
-                    #t.end_fill()
-                    fill = 'red'
-                    fill2 = 'red'
-                    fill3 = 'red'
-                    if CamY > mesh['mesh_position']['y']:
-                        t.fillcolor(fill)
-                        t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                        t.goto((FOV) * ((point6['x'] - (CamX)) / (point6['z'] + (CamZ))), (FOV) * ((point6['y'] - (CamY)) / (point6['z'] + (CamZ))))
-                        t.goto((FOV) * ((point3['x'] - (CamX)) / (point3['z'] + (CamZ))), (FOV) * ((point3['y'] - (CamY)) / (point3['z'] + (CamZ))))
-                        t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                        t.end_fill()
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                        t.goto((FOV) * ((point7['x'] - (CamX)) / (point7['z'] + (CamZ))), (FOV) * ((point7['y'] - (CamY)) / (point7['z'] + (CamZ))))
-                        t.goto((FOV) * ((point8['x'] - (CamX)) / (point8['z'] + (CamZ))), (FOV) * ((point8['y'] - (CamY)) / (point8['z'] + (CamZ))))
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.end_fill()
-                    else:
-                        t.fillcolor(fill)
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                        t.goto((FOV) * ((point7['x'] - (CamX)) / (point7['z'] + (CamZ))), (FOV) * ((point7['y'] - (CamY)) / (point7['z'] + (CamZ))))
-                        t.goto((FOV) * ((point8['x'] - (CamX)) / (point8['z'] + (CamZ))), (FOV) * ((point8['y'] - (CamY)) / (point8['z'] + (CamZ))))
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.end_fill()
-                        t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                        t.goto((FOV) * ((point6['x'] - (CamX)) / (point6['z'] + (CamZ))), (FOV) * ((point6['y'] - (CamY)) / (point6['z'] + (CamZ))))
-                        t.goto((FOV) * ((point3['x'] - (CamX)) / (point3['z'] + (CamZ))), (FOV) * ((point3['y'] - (CamY)) / (point3['z'] + (CamZ))))
-                        t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                        t.end_fill()
-                    if CamX > mesh['mesh_position']['x']:
-                        t.fillcolor(fill2)
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point8['x'] - (CamX)) / (point8['z'] + (CamZ))), (FOV) * ((point8['y'] - (CamY)) / (point8['z'] + (CamZ))))
-                        t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                        t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.end_fill()
-                        t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point3['x'] - (CamX)) / (point3['z'] + (CamZ))), (FOV) * ((point3['y'] - (CamY)) / (point3['z'] + (CamZ))))
-                        t.goto((FOV) * ((point6['x'] - (CamX)) / (point6['z'] + (CamZ))), (FOV) * ((point6['y'] - (CamY)) / (point6['z'] + (CamZ))))
-                        t.goto((FOV) * ((point7['x'] - (CamX)) / (point7['z'] + (CamZ))), (FOV) * ((point7['y'] - (CamY)) / (point7['z'] + (CamZ))))
-                        t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                        t.end_fill()
-                    else:
-                        t.fillcolor(fill2)
-                        t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point3['x'] - (CamX)) / (point3['z'] + (CamZ))), (FOV) * ((point3['y'] - (CamY)) / (point3['z'] + (CamZ))))
-                        t.goto((FOV) * ((point6['x'] - (CamX)) / (point6['z'] + (CamZ))), (FOV) * ((point6['y'] - (CamY)) / (point6['z'] + (CamZ))))
-                        t.goto((FOV) * ((point7['x'] - (CamX)) / (point7['z'] + (CamZ))), (FOV) * ((point7['y'] - (CamY)) / (point7['z'] + (CamZ))))
-                        t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                        t.end_fill()
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point8['x'] - (CamX)) / (point8['z'] + (CamZ))), (FOV) * ((point8['y'] - (CamY)) / (point8['z'] + (CamZ))))
-                        t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                        t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.end_fill()
-                    if CamZ > mesh['mesh_position']['z']:
-                        t.fillcolor(fill3)
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                        t.goto((FOV) * ((point3['x'] - (CamX)) / (point3['z'] + (CamZ))), (FOV) * ((point3['y'] - (CamY)) / (point3['z'] + (CamZ))))
-                        t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.end_fill()
-                        t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point6['x'] - (CamX)) / (point6['z'] + (CamZ))), (FOV) * ((point6['y'] - (CamY)) / (point6['z'] + (CamZ))))
-                        t.goto((FOV) * ((point7['x'] - (CamX)) / (point7['z'] + (CamZ))), (FOV) * ((point7['y'] - (CamY)) / (point7['z'] + (CamZ))))
-                        t.goto((FOV) * ((point8['x'] - (CamX)) / (point8['z'] + (CamZ))), (FOV) * ((point8['y'] - (CamY)) / (point8['z'] + (CamZ))))
-                        t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                        t.end_fill()
-                    else:
-                        t.fillcolor(fill3)
-                        t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point6['x'] - (CamX)) / (point6['z'] + (CamZ))), (FOV) * ((point6['y'] - (CamY)) / (point6['z'] + (CamZ))))
-                        t.goto((FOV) * ((point7['x'] - (CamX)) / (point7['z'] + (CamZ))), (FOV) * ((point7['y'] - (CamY)) / (point7['z'] + (CamZ))))
-                        t.goto((FOV) * ((point8['x'] - (CamX)) / (point8['z'] + (CamZ))), (FOV) * ((point8['y'] - (CamY)) / (point8['z'] + (CamZ))))
-                        t.goto((FOV) * ((point5['x'] - (CamX)) / (point5['z'] + (CamZ))), (FOV) * ((point5['y'] - (CamY)) / (point5['z'] + (CamZ))))
-                        t.end_fill()
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.begin_fill()
-                        t.goto((FOV) * ((point2['x'] - (CamX)) / (point2['z'] + (CamZ))), (FOV) * ((point2['y'] - (CamY)) / (point2['z'] + (CamZ))))
-                        t.goto((FOV) * ((point3['x'] - (CamX)) / (point3['z'] + (CamZ))), (FOV) * ((point3['y'] - (CamY)) / (point3['z'] + (CamZ))))
-                        t.goto((FOV) * ((point4['x'] - (CamX)) / (point4['z'] + (CamZ))), (FOV) * ((point4['y'] - (CamY)) / (point4['z'] + (CamZ))))
-                        t.goto((FOV) * ((point1['x'] - (CamX)) / (point1['z'] + (CamZ))), (FOV) * ((point1['y'] - (CamY)) / (point1['z'] + (CamZ))))
-                        t.end_fill()
-                    #t.getscreen().tracer(100)
-                    #t.forward(500)
-                #CamZ -= 0.01
-            """if revered == True and CamX < 5:
-                CamX += 0.1
-                if CamX == 5 or CamX > 5:
-                    revered = False
-            else:
-                CamX -= 0.1
-                if CamX == -5 or CamX < -4.9:
-                    revered = True"""
-            # 5 x 7 y
-            #gamepad_x = GPSupport.read_joystick_info_input()['x']
-            #gamepad_y = GPSupport.read_joystick_info_input()['y']
 
-            #if gamepad_x > 0.25 * 100:
-                #CamZ -= 0.01
-            #elif gamepad_x < -0.25 - 0.01 * 100:
-                #CamZ += 0.01
+    wireframe_path = (1, 2, 3, 4, 5, 6, 7, 8, 5)
+    connecting_edges = ((8, 1), (4, 3), (3, 6), (7, 2))
 
-            #if gamepad_y > 0.25 * 100:
-                #CamX -= 0.01
-            #elif gamepad_y < -0.25 - 0.01 * 100:
-                #CamX += 0.01
-            
-            #draw(t)
+    y_faces = ((4, 5, 6, 3), (1, 2, 7, 8))
+    x_faces = ((1, 8, 5, 4), (2, 3, 6, 7))
+    z_faces = ((1, 2, 3, 4), (5, 6, 7, 8))
+
+    for mesh_name in registered_meshes:
+        mesh = meshes.get(mesh_name)
+        if not mesh or mesh.get("type") != "cube":
+            continue
+
+        t.hideturtle()
+        t.width(wireframeThickness)
+
+        mesh_points = {
+            number: get_point_position(number, mesh)
+            for number in range(1, 9)
+        }
+
+        point1 = mesh_points[1]
+        if point1 is None:
+            continue
+
+        denominator = point1["z"] + CamZ
+        screen_x = FOV * ((point1["x"] + CamX) / denominator)
+        screen_y = FOV * ((point1["y"] + CamY) / denominator)
+
+        if screen_x <= -450 or screen_y <= -250:
+            continue
+
+        points += len(mesh["edges"])
+        meshesShown += 1
+
+        projected = {
+            number: _project_point(point)
+            for number, point in mesh_points.items()
+        }
+
+        t.color(wireframeColor)
+        t.penup()
+        t.goto(*projected[wireframe_path[0]])
+        t.pendown()
+        for number in wireframe_path[1:]:
+            t.goto(*projected[number])
+
+        t.penup()
+        for start_point, end_point in connecting_edges:
+            t.goto(*projected[start_point])
+            t.pendown()
+            t.goto(*projected[end_point])
+            t.penup()
+
+        faces = y_faces if CamY > mesh["mesh_position"]["y"] else tuple(reversed(y_faces))
+        for face in faces:
+            _draw_face(t, projected, face)
+
+        faces = x_faces if CamX > mesh["mesh_position"]["x"] else tuple(reversed(x_faces))
+        for face in faces:
+            _draw_face(t, projected, face)
+
+        faces = z_faces if CamZ > mesh["mesh_position"]["z"] else tuple(reversed(z_faces))
+        for face in faces:
+            _draw_face(t, projected, face)
+
 global timerOn
 global elapsed_time
 
@@ -906,23 +565,22 @@ def request_draw_3D (t):
     #request_draw_3D(t)
     afterFrame()
 
-def catch_cache (t):
+def catch_cache(t):
+    """Display the current cache contents."""
     t.getscreen().tracer(3000)
     t.penup()
     t.hideturtle()
-    t.color('gray')
-    t.goto(-(190 / 2), 100 / 2)
-    t.begin_fill()
-    t.forward(190)
-    t.right(90)
-    t.forward(100)
-    t.right(90)
-    t.forward(190)
-    t.right(90)
-    t.forward(100)
-    t.end_fill()
-    while True:
-        t.color('gray')
+    t.color("gray")
+    t.goto(-95, 50)
+    t.write(
+        f"Cache files: {len(cache_files)}",
+        align="left",
+        font=("Arial", 12, "normal"),
+    )
+
+    for index, cached in enumerate(cache_files):
+        t.goto(-95, 30 - (index * 16))
+        t.write(cached["name"], align="left", font=("Arial", 10, "normal"))
 
 def open_starter_screen (t):
     t.getscreen().tracer(3000)
@@ -947,9 +605,6 @@ def main (t):
     main(t)
 
 # get_mesh_by_name("cube")
-
-print(get_point_position("1", get_mesh_by_position(0, 0, -5)))
-print(get_point_position("1", get_mesh_by_name("cube")))
 
 def createLine (x1, y1, x2, y2, color, thickness):
     turtle.pensize(1)
@@ -1005,80 +660,4 @@ if __name__ == "__main__":
     turtle.bgcolor('black')
     register_turtle(turtle)
     
-"""import turtle
-import math
 
-# Initialize Turtle screen
-screen = turtle.Screen()
-screen.bgcolor("black")
-screen.title("3D Game Simulation")
-screen.tracer(0)
-
-# Create a turtle for drawing
-pen = turtle.Turtle()
-pen.hideturtle()
-pen.speed(0)
-pen.color("white")
-
-# Define 3D points for a cube
-cube_points = [
-    [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],  # Back face
-    [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]       # Front face
-]
-
-# Define edges connecting the points
-edges = [
-    (0, 1), (1, 2), (2, 3), (3, 0),  # Back face
-    (4, 5), (5, 6), (6, 7), (7, 4),  # Front face
-    (0, 4), (1, 5), (2, 6), (3, 7)   # Connecting edges
-]
-
-# Perspective projection function
-def project(point, fov, viewer_distance):
-    factor = fov / (viewer_distance + point[2])
-    x = point[0] * factor
-    y = point[1] * factor
-    return x, y
-
-# Draw the cube
-def draw_cube(points):
-    pen.clear()
-    for edge in edges:
-        start = points[edge[0]]
-        end = points[edge[1]]
-        pen.penup()
-        pen.goto(start[0], start[1])
-        pen.pendown()
-        pen.goto(end[0], end[1])
-
-# Main loop
-def main():
-    angle = 0
-    fov = 200
-    viewer_distance = 4
-
-    while True:
-        # Rotate cube around Y-axis
-        rotated_points = []
-        for x, y, z in cube_points:
-            temp_x = x * math.cos(angle) - z * math.sin(angle)
-            temp_z = x * math.sin(angle) + z * math.cos(angle)
-            rotated_points.append([temp_x, y, temp_z])
-
-        # Project 3D points to 2D
-        projected_points = [project(p, fov, viewer_distance) for p in rotated_points]
-
-        # Scale and translate points for Turtle
-        screen_points = [(x * 100, y * 100) for x, y in projected_points]
-
-        # Draw the cube
-        draw_cube(screen_points)
-
-        # Update screen
-        screen.update()
-
-        # Increment rotation angle
-        angle += 0.01
-
-# Run the game loop
-main()"""
