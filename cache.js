@@ -1,6 +1,6 @@
-const CACHE_NAME = 'btdpe-cached-version-v2';
-const OFFLINE_URL = '/OFFLINE.html';
-const UNKNOWN_PAGE_URL = '/UNKNOWN.html';
+const CACHE_NAME = 'btdpe-cached-version-v3';
+const OFFLINE_URL = './OFFLINE.html';
+const UNKNOWN_PAGE_URL = './UNKNOWN.html';
 const URLS_TO_CACHE = [
     OFFLINE_URL,
     UNKNOWN_PAGE_URL
